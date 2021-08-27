@@ -7,10 +7,10 @@ import { useAuth } from "../contexts/AuthContext";
 export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const {login} = useAuth();
+  const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useHistory()
+  const history = useHistory();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -18,9 +18,9 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      history.push("/")
-    } catch (e){
-        console.log(e)
+      history.push("/");
+    } catch (e) {
+      console.log(e);
       setError("Failed to log in");
     }
 

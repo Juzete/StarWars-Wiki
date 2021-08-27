@@ -13,12 +13,12 @@ export default function ForgotPassword() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    try { 
-        setMessage("")
+    try {
+      setMessage("");
       setError("");
       setLoading(true);
-      await resetPassword(emailRef.current.value)
-      setMessage("Check your email for further instructions")
+      await resetPassword(emailRef.current.value);
+      setMessage("Check your email for further instructions");
     } catch (e) {
       console.log(e);
       setError("Failed to reset password");

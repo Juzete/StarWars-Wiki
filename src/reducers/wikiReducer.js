@@ -1,15 +1,11 @@
-
-
 const defaultState = {
-    items: [],
-    isFetching: true,
-}
+  items: [],
+  isFetching: true,
+};
 
 export default function wikiReducer(state = defaultState, action) {
-    switch (action.type) {
-
-        default:
-            return state
-    }
+  switch (action.type) {
+    default:
+      return state;
+  }
 }
-
