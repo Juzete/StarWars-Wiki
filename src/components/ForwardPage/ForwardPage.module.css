@@ -1,0 +1,20 @@
+.wrapper {
+    background-color: rgb(0,3,9);
+    position: fixed;
+  }
+
+  .earthModelWrapper {
+      height: 950px;
+        position: absolute;
+        z-index: 100;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+  }
+
+  .srollTextWrapper {
+      position: relative;
+      z-index: 50;
+      overflow: hidden;
+  }

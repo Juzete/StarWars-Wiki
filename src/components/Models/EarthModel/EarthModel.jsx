@@ -16,21 +16,21 @@ export default function EarthModel(props) {
     [EarthDayMap, EarthNormalMap, EarthSpecularMap, EarthCloudsMap]
   );
 
-    const earthRef = useRef();
-    const cloudsRef = useRef()
+  const earthRef = useRef();
+  const cloudsRef = useRef();
 
-    useFrame(({clock}) => {
-      const elapsedTime = clock.getElapsedTime()
+  useFrame(({ clock }) => {
+    const elapsedTime = clock.getElapsedTime();
 
-      cloudsRef.current.rotation.y = elapsedTime / 6;
-      earthRef.current.rotation.y = elapsedTime / 6;
-    })
+    cloudsRef.current.rotation.y = elapsedTime / 6;
+    earthRef.current.rotation.y = elapsedTime / 6;
+  });
 
   return (
     <>
       {/* {<ambientLight intensity={1} />} */}
-      <pointLight color="#f6f3ea" position={[5, 0, 5]} intensity={1.2} />
-      <mesh ref={cloudsRef} scale={[3, 3, 3]}>
+      <pointLight color="#f6f3ea" position={[5, 0, 5]} intensity={1} />
+      <mesh ref={cloudsRef} scale={[2.5, 2.5, 2.5]} position={[0, -3, 0]}>
         <sphereGeometry args={[1.005, 32, 32]} />
         <meshPhongMaterial
           map={cloudsMap}
@@ -40,7 +40,7 @@ export default function EarthModel(props) {
           side={THREE.DoubleSide}
         />
       </mesh>
-      <mesh ref={earthRef} scale={[3, 3, 3]}>
+      <mesh ref={earthRef} scale={[2.5, 2.5, 2.5]} position={[0, -3, 0]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshPhongMaterial specularMap={specularMap} />
         <meshStandardMaterial
@@ -52,7 +52,7 @@ export default function EarthModel(props) {
         <OrbitControls
           enableZoom={false}
           enablePan={false}
-          enableRotate={true}
+          enableRotate={false}
           zoomSpeed={0.6}
           panSpeed={0.5}
           rotateSpeed={0.4}
