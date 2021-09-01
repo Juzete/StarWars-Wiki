@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 import EarthModel from "../Models/EarthModel/EarthModel";
 import ScrollingText from "../Models/ScrollingText/ScrollingText";
 import StarsModel from "../Models/Stars/StarsModel";
+import Logo from "../Logo/Logo";
 import styles from "./ForwardPage.module.css";
 
 export default function ForwardPage() {
@@ -16,6 +17,7 @@ export default function ForwardPage() {
           </Suspense>
         </Canvas>
       </div>
+      <Logo />
       <div className={styles.srollTextWrapper}>
         <ScrollingText />
       </div>

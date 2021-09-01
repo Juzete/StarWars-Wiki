@@ -1,0 +1,23 @@
+@font-face {
+  font-family: "Distant Galaxy";
+  src: url("../../assets/fonts/SF\ Distant\ Galaxy\ Outline.ttf");
+}
+
+.logo {
+  display: block;
+  font-family: "Distant Galaxy";
+  position: relative;
+  z-index: 110;
+  color: white;
+  font-size: xx-large;
+  margin: 20px;
+  width: 210px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.logo:hover {
+  color: white;
+  border-bottom: white 2px solid;
+  text-decoration: none;
+}
