@@ -4,27 +4,34 @@ import Dashboard from "./Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import Models from "./Models/Models";
 import ForgotPassword from "./Auth/ForgotPassword";
-import SignUp from "./Auth/SignUp"
-import Login from "./Auth/Login"
+import SignUp from "./Auth/SignUp";
+import Login from "./Auth/Login";
 import ForwardPage from "./ForwardPage/ForwardPage";
-
+import { infoRoutes } from "./Info/infoRoutes";
 
 function App() {
   return (
-      <div>
-        <Router>
-          <AuthProvider>
-            <Switch>
-              <PrivateRoute exact path="/" component={Dashboard} />
-              <Route path="/signup" component={SignUp} />
-              <Route path="/login" component={Login} />
-              <Route path="/forgot-password" component={ForgotPassword} />
-              <Route path="/models" component={Models} />
-              <Route path="/forward" component={ForwardPage} />
-            </Switch>
-          </AuthProvider>
-        </Router>
-      </div>
+    <div>
+      <Router>
+        <AuthProvider>
+          <Switch>
+            <PrivateRoute exact path="/" component={Dashboard} />
+            <Route path="/signup" component={SignUp} />
+            <Route path="/login" component={Login} />
+            <Route path="/forgot-password" component={ForgotPassword} />
+            <Route path="/models" component={Models} />
+            <Route path="/forward" component={ForwardPage} />
+            {infoRoutes.map(({ path, component: C, fetchPath }) => (
+              <Route
+                key={fetchPath}
+                path={path}
+                render={(props) => <C {...props} fetchPath={fetchPath} />}
+              />
+            ))}
+          </Switch>
+        </AuthProvider>
+      </Router>
+    </div>
   );
 }
 

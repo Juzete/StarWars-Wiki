@@ -5,6 +5,7 @@ import ScrollingText from "../Models/ScrollingText/ScrollingText";
 import StarsModel from "../Models/Stars/StarsModel";
 import Logo from "../Logo/Logo";
 import styles from "./ForwardPage.module.css";
+import Navigation from "../Navigation/Navigation";
 
 export default function ForwardPage() {
   return (
@@ -18,6 +19,7 @@ export default function ForwardPage() {
         </Canvas>
       </div>
       <Logo />
+        <Navigation />
       <div className={styles.srollTextWrapper}>
         <ScrollingText />
       </div>

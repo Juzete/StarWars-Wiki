@@ -1,8 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap");
 
-
 .wrapper {
-    position: relative;
+  position: relative;
   display: flex;
   height: 100%;
   width: 40%;
@@ -11,26 +10,30 @@
 }
 
 .scrollText {
-    color: #ffc909;
-    font-size: 3vw;
-    line-height: 1.5em;
-    font-weight: bold;
-    text-align: justify;
-    position: relative;
-    animation: scroll 60s linear forwards;
+  color: #ffc909;
+  font-size: 3vw;
+  line-height: 1.5em;
+  font-weight: bold;
+  text-align: justify;
+  position: relative;
+  animation: scroll 60s linear forwards;
 }
 
 .h1 {
-    text-align: center;
+  text-align: center;
 }
 
-
-
 ::-webkit-scrollbar {
-    width: 0;
-  }
+  width: 0;
+}
 
 @keyframes scroll {
-    from { top: 0; transform: translate(0) rotateX(15deg)}
-    to { top: -7500px; transform: translateZ(-2500px) rotateX(15deg) }
+  from {
+    top: 0;
+    transform: translate(0) rotateX(15deg);
+  }
+  to {
+    top: -7500px;
+    transform: translateZ(-2500px) rotateX(15deg);
+  }
 }
