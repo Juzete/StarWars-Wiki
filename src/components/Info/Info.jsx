@@ -7,10 +7,12 @@ import { fetchDataAction } from "../../reducers/wikiReducer";
 import Logo from "../Logo/Logo";
 import StarsModel from "../Models/Stars/StarsModel";
 import styles from "./Info.module.css";
+import Loader from "react-js-loader";
 
 export default function Info({ fetchPath }) {
   const dispatch = useDispatch();
   const information = useSelector((state) => state.wiki.data);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -19,10 +21,11 @@ export default function Info({ fetchPath }) {
       dispatch(fetchDataAction(data.results));
     }
     fetchData();
+    setLoading(false);
   }, []);
 
   const printInfoPeople = () => {
-   return information.map((item) => {
+    return information.map((item) => {
       return (
         <>
           <div className={styles.infoItem}>
@@ -37,14 +40,23 @@ export default function Info({ fetchPath }) {
           </div>
         </>
       );
-    })
+    });
   };
 
   console.log({ information });
   return (
     <div className={styles.wrapper}>
       <Logo />
-      <div className={styles.infoWrapper}>{printInfoPeople()}</div>
+      {loading ? (
+        <Loader
+          type="spinner-default"
+          bgColor={"#FFFFFF"}
+          title={"Loading..."}
+          size={100}
+        />
+      ) : (
+        <div className={styles.infoWrapper}>{printInfoPeople()}</div>
+      )}
       <div className={styles.modelWrapper}>
         <Canvas>
           <Suspense fallback={null}>

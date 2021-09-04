@@ -6,30 +6,30 @@
 }
 
 .modelWrapper {
-    height: 950px;
-    position: absolute;
-    z-index: 100;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
+  height: 950px;
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 
-  .infoWrapper {
-      width: 1200px;
-      display: flex;
-      margin: 0 auto;
-      flex-wrap: wrap;
-      color: white;
-      font-size: large;
-  }
+.infoWrapper {
+  width: 1200px;
+  display: flex;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  color: white;
+  font-size: large;
+}
 
-  .infoItem {
-    min-width: 200px;
-    align-items: center;
-    text-align: center;
-    margin: 10px;
-    padding: 5px;
-    border: 2px solid white;
-    border-radius: 10px;
-  }
+.infoItem {
+  min-width: 200px;
+  align-items: center;
+  text-align: center;
+  margin: 10px;
+  padding: 5px;
+  border: 2px solid white;
+  border-radius: 10px;
+}
