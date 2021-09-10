@@ -8,12 +8,16 @@ import SignUp from "./Auth/SignUp";
 import Login from "./Auth/Login";
 import ForwardPage from "./ForwardPage/ForwardPage";
 import { infoRoutes } from "./Info/infoRoutes";
+import Logo from "./Logo/Logo";
+import Navigation from "./Navigation/Navigation";
 
 function App() {
   return (
     <div>
       <Router>
         <AuthProvider>
+          <Navigation />
+          <Logo />
           <Switch>
             <PrivateRoute exact path="/" component={Dashboard} />
             <Route path="/signup" component={SignUp} />

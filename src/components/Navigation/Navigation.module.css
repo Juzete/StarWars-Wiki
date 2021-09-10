@@ -1,7 +1,8 @@
 .wrapper {
-  position: relative;
+  display: absolute;
+  position: fixed;
+  top: 150px;
   z-index: 110;
-  margin: 0;
   width: 200px;
 }
 

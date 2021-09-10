@@ -15,20 +15,24 @@ export default function ForwardPage() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 4000);
+    }, 1000);
   }, []);
 
   return (
     <div className={styles.wrapper}>
-      <Logo />
-
-      {loading ? <Loader
+      {loading ? (
+        <Loader
           type="spinner-default"
           bgColor={"#FFFFFF"}
           title={"Loading..."}
           size={100}
-        /> : null}
-      
+          className={styles.loader}
+        />
+      ) : (
+        <div className={styles.srollTextWrapper}>
+          <ScrollingText />
+        </div>
+      )}
 
       <div className={`${styles.earthModelWrapper}`}>
         <Canvas>
@@ -42,10 +46,6 @@ export default function ForwardPage() {
             <StarsModel />
           </Suspense>
         </Canvas>
-      </div>
-      <Navigation />
-      <div className={styles.srollTextWrapper}>
-        <ScrollingText />
       </div>
     </div>
   );

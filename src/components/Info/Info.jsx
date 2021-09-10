@@ -16,27 +16,24 @@ export default function Info({ fetchPath }) {
 
   useEffect(() => {
     async function fetchData() {
-      let res = await fetch(`https://swapi.dev/api/people/?format=json`);
+      let res = await fetch(`https://swapi.dev/api/${fetchPath}/?format=json`);
       let data = await res.json();
       dispatch(fetchDataAction(data.results));
     }
-    fetchData();
-    setLoading(false);
+    async function loadingFetch() {
+      await fetchData();
+      setLoading(false);
+    }
+
+    loadingFetch();
   }, []);
 
-  const printInfoPeople = () => {
+  const printLabelInfo = () => {
     return information.map((item) => {
       return (
         <>
           <div className={styles.infoItem}>
-            <p>Name: {item.name}</p>
-            <p>Height: {item.height}</p>
-            <p>Mass: {item.mass}</p>
-            <p>Hair color: {item.hair_color}</p>
-            <p>Skin color: {item.skin_color}</p>
-            <p>Eye color: {item.eye_color}</p>
-            <p>Birth year: {item.birth_year}</p>
-            <p>Gender: {item.gender}</p>
+            {item.name ? <p>{item.name}</p> : <p>{item.title}</p>}
           </div>
         </>
       );
@@ -46,7 +43,6 @@ export default function Info({ fetchPath }) {
   console.log({ information });
   return (
     <div className={styles.wrapper}>
-      <Logo />
       {loading ? (
         <Loader
           type="spinner-default"
@@ -55,7 +51,7 @@ export default function Info({ fetchPath }) {
           size={100}
         />
       ) : (
-        <div className={styles.infoWrapper}>{printInfoPeople()}</div>
+        <div className={styles.infoWrapper}>{printLabelInfo()}</div>
       )}
       <div className={styles.modelWrapper}>
         <Canvas>

@@ -4,13 +4,14 @@
 }
 
 .logo {
-  display: block;
+  display: absolute;
+  position: fixed;
   font-family: "Distant Galaxy";
-  position: relative;
   z-index: 110;
   color: white;
   font-size: xx-large;
-  margin: 20px;
+  top: 10px;
+  left: 10px;
   width: 310px;
   cursor: pointer;
   text-decoration: none;

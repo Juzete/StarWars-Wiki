@@ -6,7 +6,7 @@
 }
 
 .earthModelWrapper {
-  height: 950px;
+  height: 100%;
   position: absolute;
   z-index: 100;
   top: 0;
@@ -21,3 +21,7 @@
   overflow: hidden;
 }
 
+.loader {
+  position: fixed;
+  z-index: 100;
+}
