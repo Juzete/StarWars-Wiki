@@ -1,8 +1,19 @@
+import { Link } from "react-router-dom";
+
 export const printConditions = (type, information) => {
+  console.log(fetchData(information.homeworld).then(data => {return data})); 
+
+  async function fetchData(url) {
+    let res = await fetch(url);
+    let data = await res.json();
+    return data;
+  }
+
   switch (type) {
     case "people":
       return (
         <div>
+          <h2>Information</h2>
           <p>Name: {information.name}</p>
           <p>Height: {information.height}</p>
           <p>Mass: {information.mass}</p>
@@ -11,11 +22,13 @@ export const printConditions = (type, information) => {
           <p>Eye color: {information.eye_color}</p>
           <p>Birth year: {information.birth_year}</p>
           <p>Gender: {information.gender}</p>
+          <p>Homeworld: {}</p>
         </div>
       );
     case "planets":
       return (
         <div>
+          <h2>Information</h2>
           <p>Name: {information.name}</p>
           <p>Rotation period: {information.rotation_period}</p>
           <p>Orbital period: {information.orbital_period}</p>
@@ -30,6 +43,7 @@ export const printConditions = (type, information) => {
     case "films":
       return (
         <div>
+          <h2>Information</h2>
           <p>Title: {information.title}</p>
           <p>Episode id: {information.episode_id}</p>
           <p>Director: {information.director}</p>
@@ -41,6 +55,7 @@ export const printConditions = (type, information) => {
     case "species":
       return (
         <div>
+          <h2>Information</h2>
           <p>Name: {information.name}</p>
           <p>Classification: {information.classification}</p>
           <p>Designation: {information.designation}</p>
@@ -56,6 +71,7 @@ export const printConditions = (type, information) => {
     case "vehicles":
       return (
         <div>
+          <h2>Information</h2>
           <p>Name: {information.name}</p>
           <p>Model: {information.model}</p>
           <p>Manufacturer: {information.manufacturer}</p>
@@ -73,6 +89,7 @@ export const printConditions = (type, information) => {
     case "starships":
       return (
         <div>
+          <h2>Information</h2>
           <p>Name: {information.name}</p>
           <p>Model: {information.model}</p>
           <p>Manufacturer: {information.manufacturer}</p>

@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { showModalAction } from "../../../reducers/wikiReducer";
 import styles from "./Modal.module.css";
 import Loader from "react-js-loader";
 import { useSelector } from "react-redux";
 import { printConditions } from "./printConditions";
+import { showModalAction } from "../../../store/actions/wiki";
 
 const Modal = ({ type, url, visible, setVisible }) => {
   const dispatch = useDispatch();
@@ -16,14 +16,17 @@ const Modal = ({ type, url, visible, setVisible }) => {
     rootClasses.push(styles.active);
   }
 
+  async function fetchData() {
+    let res = await fetch(url);
+    let data = await res.json();
+    dispatch(showModalAction(data));
+  }
+
+  const memoizedData = useCallback(() => fetchData(), [url]);
+
   useEffect(() => {
-    async function fetchData() {
-      let res = await fetch(url);
-      let data = await res.json();
-      dispatch(showModalAction(data));
-    }
     async function loadingFetch() {
-      await fetchData();
+      await memoizedData();
       setLoading(false);
     }
 
