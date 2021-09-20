@@ -1,13 +1,16 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { showModalAction } from "../../../store/actions/wiki";
 
-export const printConditions = (type, information) => {
-  console.log(fetchData(information.homeworld).then(data => {return data})); 
+export const PrintConditions = (type, id) => {
+  console.log({id}, {type})
+  const information = useSelector((state) => state.wiki.dataInstance);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(showModalAction(type, id))
+  }, [])
 
-  async function fetchData(url) {
-    let res = await fetch(url);
-    let data = await res.json();
-    return data;
-  }
 
   switch (type) {
     case "people":

@@ -11,11 +11,10 @@ import { fetchDataAction } from "../../store/actions/wiki";
 
 export default function Info({ fetchPath }) {
   const dispatch = useDispatch();
-  const information = useSelector((state) => state.wiki.data);
   const allData = useSelector((state) => state.wiki);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [instanceUrl, setInstanceUrl] = useState("");
+  const [instanceId, setInstanceId] = useState();
   const [type, setType] = useState();
 
   useEffect(() => {
@@ -39,20 +38,20 @@ export default function Info({ fetchPath }) {
         <div
           onClick={(e) => {
             setShowModal(true);
-            setInstanceUrl(e.target.getAttribute("url"));
             setType(e.target.getAttribute("type"));
+            setInstanceId(e.target.getAttribute("id"))
           }}
           type={fetchPath}
-          url={item.item.url}
+          id={item.id}
           className={styles.infoItem}
-          key={item.item.url}
+          key={item.id}
         >
           {item.item.name ? (
-            <p url={item.item.url} type={fetchPath}>
+            <p id={item.id} type={fetchPath}>
               {item.item.name}
             </p>
           ) : (
-            <p url={item.item.url} type={fetchPath}>
+            <p id={item.id} type={fetchPath}>
               {item.item.title}
             </p>
           )}
@@ -77,7 +76,7 @@ export default function Info({ fetchPath }) {
       {showModal ? (
         <Modal
           type={type}
-          url={instanceUrl}
+          id={instanceId}
           visible={showModal}
           setVisible={setShowModal}
         />

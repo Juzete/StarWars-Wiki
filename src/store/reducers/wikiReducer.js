@@ -25,15 +25,18 @@ export default function wikiReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_DATA:
       return {
-        ...state,
+        ...initialState,
         data: action.payload,
         [action.path]: dataSetLocation(action.payload, action.path),
       };
 
     case SHOW_MODAL:
+    console.log(action.id)
+    console.log(action.path)
+    console.log(initialState[action.path][action.id - 1], 111)
       return {
-        ...state,
-        dataInstance: action.payload,
+        ...initialState,
+        dataInstance: initialState[action.path][action.id - 1].item,
       };
 
     default:
