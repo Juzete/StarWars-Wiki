@@ -1,16 +1,14 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { showModalAction } from "../../../store/actions/wiki";
 
 export const PrintConditions = (type, id) => {
-  console.log({id}, {type})
+  console.log({ id }, { type });
   const information = useSelector((state) => state.wiki.dataInstance);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(showModalAction(type, id))
-  }, [])
-
+    dispatch(showModalAction(type, id));
+  }, []);
 
   switch (type) {
     case "people":

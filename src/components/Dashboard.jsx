@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Alert, Card } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
+import styles from "./Dashboard.module.css"
 
 export default function Dashboard() {
   const [error, setError] = useState("");
@@ -22,6 +23,7 @@ export default function Dashboard() {
   }
   return (
     <>
+    <div className={styles.wrapper}>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Profile</h2>
@@ -33,6 +35,7 @@ export default function Dashboard() {
         <Button variant="link" onClick={handleLogout}>
           Log Out
         </Button>
+      </div>
       </div>
     </>
   );

@@ -7,7 +7,8 @@ import StarsModel from "../Models/Stars/StarsModel";
 import styles from "./Info.module.css";
 import Loader from "react-js-loader";
 import Modal from "./ModalWindow/Modal";
-import { fetchDataAction } from "../../store/actions/wiki";
+import { fetchDataAction, setPaginationAction } from "../../store/actions/wiki";
+import Pagination from "./Pagination/Pagination";
 
 export default function Info({ fetchPath }) {
   const dispatch = useDispatch();
@@ -16,30 +17,34 @@ export default function Info({ fetchPath }) {
   const [showModal, setShowModal] = useState(false);
   const [instanceId, setInstanceId] = useState();
   const [type, setType] = useState();
+  const defaultUrl = `https://swapi.dev/api/${fetchPath}/?format=json`;
+  const [url, setUrl] = useState(defaultUrl)
+
 
   useEffect(() => {
     async function fetchData() {
-      let res = await fetch(`https://swapi.dev/api/${fetchPath}/?format=json`);
+      let res = await fetch(url);
       let data = await res.json();
+      console.log({data})
       dispatch(fetchDataAction(data.results, fetchPath));
+      dispatch(setPaginationAction(data.previous, data.next));
     }
     async function loadingFetch() {
       await fetchData();
       setLoading(false);
     }
-    console.log(allData, "alldata");
-    console.log(allData[fetchPath], "fetchPath");
     allData[fetchPath].length === 0 ? loadingFetch() : setLoading(false);
-  }, []);
+    if (url !== defaultUrl) loadingFetch()
+  }, [url]);
 
   const printLabelInfo = () => {
-    return allData[fetchPath].map((item) => {
+    return allData[fetchPath].map((item,index) => {
       return (
         <div
           onClick={(e) => {
             setShowModal(true);
             setType(e.target.getAttribute("type"));
-            setInstanceId(e.target.getAttribute("id"))
+            setInstanceId(e.target.getAttribute("id"));
           }}
           type={fetchPath}
           id={item.id}
@@ -70,7 +75,10 @@ export default function Info({ fetchPath }) {
           size={100}
         />
       ) : (
-        <div className={styles.infoWrapper}>{printLabelInfo()}</div>
+        <div className={styles.infoWrapper}>
+          {printLabelInfo()}
+          <Pagination setUrl={setUrl}/>
+        </div>
       )}
 
       {showModal ? (

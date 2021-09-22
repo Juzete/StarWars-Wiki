@@ -1,8 +1,11 @@
-import React, { useRef } from "react";
+import { Canvas } from "@react-three/fiber";
+import React, { Suspense, useRef } from "react";
 import { useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import StarsModel from "../Models/Stars/StarsModel";
+import styles from "./SignUp.module.css"
 
 export default function SignUp() {
   const emailRef = useRef();
@@ -34,6 +37,7 @@ export default function SignUp() {
 
   return (
     <>
+    <div className={styles.wrapper}>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Sign Up</h2>
@@ -59,7 +63,8 @@ export default function SignUp() {
       </Card>
       <div className="w-100 text-center mt-2">
         Already have an account? <Link to="/login">Log In</Link>
-      </div>
+      </div>    
+    </div>
     </>
   );
 }
