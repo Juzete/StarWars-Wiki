@@ -2,15 +2,14 @@ import { AuthProvider } from "../contexts/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import PrivateRoute from "./PrivateRoute";
-
-import ForgotPassword from "./Auth/ForgotPassword";
-import SignUp from "./Auth/SignUp";
-import Login from "./Auth/Login";
+import ForgotPassword from "./Auth/ForgotPassword/ForgotPassword";
+import SignUp from "./Auth/SignUp/SignUp";
+import Login from "./Auth/Login/Login";
 import ForwardPage from "./ForwardPage/ForwardPage";
 import { infoRoutes } from "./Info/infoRoutes";
 import Logo from "./Logo/Logo";
 import Navigation from "./Navigation/Navigation";
-import Profile from "./Auth/ProfileButton";
+import Profile from "./Auth/ProfileButton/ProfileButton";
 
 function App() {
   return (

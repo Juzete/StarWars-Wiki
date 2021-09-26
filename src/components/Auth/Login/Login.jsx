@@ -3,9 +3,10 @@ import React, { Suspense, useRef } from "react";
 import { useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
-import StarsModel from "../Models/Stars/StarsModel";
-import styles from "./Login.module.css"
+import { useAuth } from "../../../contexts/AuthContext";
+import Logo from "../../Logo/Logo";
+import StarsModel from "../../Models/Stars/StarsModel";
+import styles from "./Login.module.css";
 
 export default function Login() {
   const emailRef = useRef();
@@ -32,9 +33,9 @@ export default function Login() {
 
   return (
     <>
-    <div className={styles.wrapper}>
-      <Card>
-        <Card.Body>
+      <Logo />
+      <div className={styles.background}>
+        <div className={styles.wrapper}>
           <h2 className="text-center mb-4">Log In</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
@@ -53,17 +54,18 @@ export default function Login() {
           <div className="w-100 text-center mt-3">
             <Link to="/forgot-password">Forgot Password?</Link>
           </div>
-        </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
-        Need an account? <Link to="/signup">Sign Up</Link>
-      </div>
-      <Canvas>
-          <Suspense fallback={null}>
-            <StarsModel />
-          </Suspense>
-        </Canvas>
+          <div className="w-100 text-center mt-2">
+            Need an account? <Link to="/signup">Sign Up</Link>
+          </div>
+          <div className={styles.stars}>
+            <Canvas>
+              <Suspense fallback={null}>
+                <StarsModel />
+              </Suspense>
+            </Canvas>
+          </div>
         </div>
+      </div>
     </>
   );
 }

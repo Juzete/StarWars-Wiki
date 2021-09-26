@@ -47,7 +47,6 @@ export function AuthProvider({ children }) {
     }
     dispatch(setCurrentUserAction(currentUser));
     dispatchAuth();
-
   }, [currentUser]);
 
   console.log({ currentUser });

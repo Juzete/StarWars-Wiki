@@ -39,11 +39,6 @@ export default function ForwardPage() {
             <StarsModel />
           </Suspense>
         </Canvas>
-        <Canvas>
-          <Suspense fallback={null}>
-            <StarsModel />
-          </Suspense>
-        </Canvas>
       </div>
     </div>
   );

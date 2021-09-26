@@ -18,14 +18,13 @@ export default function Info({ fetchPath }) {
   const [instanceId, setInstanceId] = useState();
   const [type, setType] = useState();
   const defaultUrl = `https://swapi.dev/api/${fetchPath}/?format=json`;
-  const [url, setUrl] = useState(defaultUrl)
-
+  const [url, setUrl] = useState(defaultUrl);
 
   useEffect(() => {
     async function fetchData() {
       let res = await fetch(url);
       let data = await res.json();
-      console.log({data})
+      console.log({ data });
       dispatch(fetchDataAction(data.results, fetchPath));
       dispatch(setPaginationAction(data.previous, data.next));
     }
@@ -34,11 +33,11 @@ export default function Info({ fetchPath }) {
       setLoading(false);
     }
     allData[fetchPath].length === 0 ? loadingFetch() : setLoading(false);
-    if (url !== defaultUrl) loadingFetch()
+    if (url !== defaultUrl) loadingFetch();
   }, [url]);
 
   const printLabelInfo = () => {
-    return allData[fetchPath].map((item,index) => {
+    return allData[fetchPath].map((item, index) => {
       return (
         <div
           onClick={(e) => {
@@ -77,7 +76,7 @@ export default function Info({ fetchPath }) {
       ) : (
         <div className={styles.infoWrapper}>
           {printLabelInfo()}
-          <Pagination setUrl={setUrl}/>
+          <Pagination setUrl={setUrl} />
         </div>
       )}
 

@@ -1,4 +1,9 @@
-import { FETCH_DATA, SET_CURRENT_USER, SET_PAGINATION, SHOW_MODAL } from "../constants";
+import {
+  FETCH_DATA,
+  SET_CURRENT_USER,
+  SET_PAGINATION,
+  SHOW_MODAL,
+} from "../constants";
 import { dataSetLocation } from "../utils";
 const initialState = {
   currentUser: null,
@@ -15,34 +20,33 @@ const initialState = {
   dataInstance: {},
 };
 
-
 export default function wikiReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_DATA:
       return {
-        ...initialState,
+        ...state,
         data: action.payload,
-        [action.path]: dataSetLocation(initialState, action.payload, action.path),
+        [action.path]: dataSetLocation(state, action.payload, action.path),
       };
 
     case SHOW_MODAL:
       return {
-        ...initialState,
-        dataInstance: initialState[action.path][action.id - 1].item,
+        ...state,
+        dataInstance: state[action.path][action.id - 1].item,
       };
-    
+
     case SET_PAGINATION:
       return {
-        ...initialState,
+        ...state,
         nextPage: action.next,
         prevPage: action.prev,
       };
 
     case SET_CURRENT_USER:
       return {
-        ...initialState,
+        ...state,
         currentUser: action.currentUser,
-      }
+      };
     default:
       return state;
   }
