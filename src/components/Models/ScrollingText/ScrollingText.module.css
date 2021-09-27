@@ -23,10 +23,6 @@
   text-align: center;
 }
 
-::-webkit-scrollbar {
-  width: 0;
-}
-
 @keyframes scroll {
   from {
     top: 0;

@@ -10,9 +10,8 @@
 }
 
 .modelWrapper {
-  height: 950px;
   position: absolute;
-  z-index: 100;
+  z-index: -100;
   top: 0;
   left: 0;
   right: 0;
@@ -20,12 +19,15 @@
 }
 
 .infoWrapper {
-  width: 1200px;
+  width: 1250px;
+  height: 480px;
   display: flex;
   margin: 0 auto;
   flex-wrap: wrap;
   color: white;
   font-size: large;
+  overflow-y: scroll;
+  border: solid 2px white;
 }
 
 .infoItem {

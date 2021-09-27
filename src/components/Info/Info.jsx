@@ -36,6 +36,15 @@ export default function Info({ fetchPath }) {
     if (url !== defaultUrl) loadingFetch();
   }, [url]);
 
+  const scrollHandler = (e) => {
+    console.log("scrollHeight", e.target.scrollHeight);
+    console.log("scrollTop", e.target.scrollTop);
+    console.log(e.target.scrollHeight - e.target.scrollTop)
+    if(e.target.scrollHeight - e.target.scrollTop < 700 && allData.nextPage) {
+      setUrl(allData.nextPage);
+    }
+  };
+
   const printLabelInfo = () => {
     return allData[fetchPath].map((item, index) => {
       return (
@@ -74,9 +83,9 @@ export default function Info({ fetchPath }) {
           size={100}
         />
       ) : (
-        <div className={styles.infoWrapper}>
+        <div className={styles.infoWrapper} onScroll={(e) => scrollHandler(e)}>
           {printLabelInfo()}
-          <Pagination setUrl={setUrl} />
+          {/* <Pagination setUrl={setUrl} /> */}
         </div>
       )}
 
