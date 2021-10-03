@@ -10,12 +10,18 @@
 }
 
 .modalContent {
+  display: flex;
+  justify-content: center;
+  width: 600px;
+  height: 700px;
   padding: 25px;
   color: antiquewhite;
   font-size: large;
   background: rgb(27, 27, 27);
   border-radius: 16px;
-  min-width: 250px;
+
+  overflow: hidden;
+  overflow-y: visible;
 }
 
 .modal.active {

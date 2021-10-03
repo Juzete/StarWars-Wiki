@@ -1,3 +1,4 @@
+import Comments from "./Comments/Comments";
 import styles from "./Modal.module.css";
 import { PrintConditions } from "./printConditions";
 
@@ -6,6 +7,7 @@ const Modal = ({ type, id, visible, setVisible }) => {
   if (visible) {
     rootClasses.push(styles.active);
   }
+  console.log({ id });
 
   return (
     <div
@@ -15,7 +17,10 @@ const Modal = ({ type, id, visible, setVisible }) => {
       }}
     >
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-        <div>{PrintConditions(type, id)}</div>
+        <div>
+          {PrintConditions(type, id)}
+          <Comments path={type} id={id}/>
+        </div>
       </div>
     </div>
   );

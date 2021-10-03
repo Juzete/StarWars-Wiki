@@ -9,3 +9,32 @@ export const dataSetLocation = (initialState, payload, path) => {
   console.log(result, "result");
   return result;
 };
+
+export const postComm = (initialState, path, id, comment, metaData) => {
+  let commentsObj = initialState[path][id - 1].comments;
+  let commentId = null;
+  console.log(initialState[path][id - 1], 123123131);
+  const tempArray = [];
+  if (commentsObj) {
+    commentsObj.forEach(item => {
+      tempArray.push(item.id);
+    }); 
+    commentId = Math.max(...tempArray) + 1;
+    let payload = {
+      id: commentId,
+      comment: comment,
+      metaData: metaData,
+    };
+    commentsObj.push(payload);
+  } else {
+    let payload = {
+      id: 1,
+      comment: comment,
+      metaData: metaData,
+    };
+    initialState[path][id - 1].comments = [];
+    initialState[path][id - 1].comments.push(payload);
+  }
+
+  return initialState[path];
+};

@@ -3,12 +3,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { showModalAction } from "../../../store/actions/wiki";
 
 export const PrintConditions = (type, id) => {
-  console.log({ id }, { type });
   const information = useSelector((state) => state.wiki.dataInstance);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(showModalAction(type, id));
   }, []);
+
+  async function fetchData(url, param) {
+    let res = await fetch(url);
+    let data = await res.json();
+    console.log({ data });
+    return data[param];
+  }
+  console.log(information, 111);
+  console.log(information["homeworld"], 222);
+
+  function dispatchAdditionalData(field, str, param) {
+    let newField = information[field];
+    console.log(newField);
+    if (newField.indexOf(str) !== -1) {
+      return fetchData(str, param);
+    }
+  }
 
   switch (type) {
     case "people":
@@ -23,7 +39,14 @@ export const PrintConditions = (type, id) => {
           <p>Eye color: {information.eye_color}</p>
           <p>Birth year: {information.birth_year}</p>
           <p>Gender: {information.gender}</p>
-          <p>Homeworld: {}</p>
+          <p>
+            {/* Homeworld:{" "}
+            {dispatchAdditionalData(
+              "homeworld",
+              "https://swapi.dev/api/planets/",
+              "name"
+            )}{" "} */}
+          </p>
         </div>
       );
     case "planets":

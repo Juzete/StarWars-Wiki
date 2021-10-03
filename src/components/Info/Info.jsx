@@ -37,10 +37,7 @@ export default function Info({ fetchPath }) {
   }, [url]);
 
   const scrollHandler = (e) => {
-    console.log("scrollHeight", e.target.scrollHeight);
-    console.log("scrollTop", e.target.scrollTop);
-    console.log(e.target.scrollHeight - e.target.scrollTop)
-    if(e.target.scrollHeight - e.target.scrollTop < 700 && allData.nextPage) {
+    if (e.target.scrollHeight - e.target.scrollTop < 700 && allData.nextPage) {
       setUrl(allData.nextPage);
     }
   };
