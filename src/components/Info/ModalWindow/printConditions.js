@@ -1,136 +1,92 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { showModalAction } from "../../../store/actions/wiki";
 
-export const PrintConditions = (type, id) => {
+export const PrintConditions = ({ type, id }) => {
   const information = useSelector((state) => state.wiki.dataInstance);
   const dispatch = useDispatch();
+  const [objectToPrint, setObjectToPrint] = useState({});
+
   useEffect(() => {
     dispatch(showModalAction(type, id));
   }, []);
 
+  useEffect(() => {
+    loadObjectToPrint();
+  }, [information]);
+
   async function fetchData(url, param) {
     let res = await fetch(url);
     let data = await res.json();
-    console.log({ data });
     return data[param];
   }
-  console.log(information, 111);
-  console.log(information["homeworld"], 222);
 
-  function dispatchAdditionalData(field, str, param) {
-    let newField = information[field];
-    console.log(newField);
-    if (newField.indexOf(str) !== -1) {
-      return fetchData(str, param);
-    }
+  async function fetchVal(value, key) {
+    const res = await fetch(value);
+    let data = await res.json();
+    if (data.name) return data.name;
+    else return data.title;
   }
 
-  switch (type) {
-    case "people":
-      return (
-        <div>
-          <h2>Information</h2>
-          <p>Name: {information.name}</p>
-          <p>Height: {information.height}</p>
-          <p>Mass: {information.mass}</p>
-          <p>Hair color: {information.hair_color}</p>
-          <p>Skin color: {information.skin_color}</p>
-          <p>Eye color: {information.eye_color}</p>
-          <p>Birth year: {information.birth_year}</p>
-          <p>Gender: {information.gender}</p>
+  function printObject() {
+    const listItems = [];
+    for (const key in objectToPrint) {
+      let field = key[0].toUpperCase() + key.slice(1);
+      field = field.replace("_", " ");
+      listItems.push(
+        <div key={key}>
           <p>
-            {/* Homeworld:{" "}
-            {dispatchAdditionalData(
-              "homeworld",
-              "https://swapi.dev/api/planets/",
-              "name"
-            )}{" "} */}
+            {field} :{" "}
+            {objectToPrint[key].length > 0 ? objectToPrint[key] : "none"}
           </p>
         </div>
       );
-    case "planets":
-      return (
-        <div>
-          <h2>Information</h2>
-          <p>Name: {information.name}</p>
-          <p>Rotation period: {information.rotation_period}</p>
-          <p>Orbital period: {information.orbital_period}</p>
-          <p>Diameter: {information.diameter}</p>
-          <p>Climate: {information.climate}</p>
-          <p>Gravity: {information.gravity}</p>
-          <p>Terrain: {information.terrain}</p>
-          <p>Surface water: {information.surface_water}</p>
-          <p>Population: {information.population}</p>
-        </div>
-      );
-    case "films":
-      return (
-        <div>
-          <h2>Information</h2>
-          <p>Title: {information.title}</p>
-          <p>Episode id: {information.episode_id}</p>
-          <p>Director: {information.director}</p>
-          <p>Producer: {information.producer}</p>
-          <p>Release date: {information.release_date}</p>
-        </div>
-      );
-
-    case "species":
-      return (
-        <div>
-          <h2>Information</h2>
-          <p>Name: {information.name}</p>
-          <p>Classification: {information.classification}</p>
-          <p>Designation: {information.designation}</p>
-          <p>Average height: {information.average_height}</p>
-          <p>Skin colors: {information.skin_colors}</p>
-          <p>Hair colors: {information.hair_colors}</p>
-          <p>Eye colors: {information.eye_colors}</p>
-          <p>Average lifespan: {information.average_lifespan}</p>
-          <p>Language: {information.language}</p>
-        </div>
-      );
-
-    case "vehicles":
-      return (
-        <div>
-          <h2>Information</h2>
-          <p>Name: {information.name}</p>
-          <p>Model: {information.model}</p>
-          <p>Manufacturer: {information.manufacturer}</p>
-          <p>Cost in credits: {information.cost_in_credits}</p>
-          <p>Length: {information.length}</p>
-          <p>Max atmosphering speed: {information.max_atmosphering_speed}</p>
-          <p>Crew: {information.crew}</p>
-          <p>Passengers: {information.passengers}</p>
-          <p>Cargo capacity: {information.cargo_capacity}</p>
-          <p>Consumables: {information.consumables}</p>
-          <p>Vehicle class: {information.vehicle_class}</p>
-        </div>
-      );
-
-    case "starships":
-      return (
-        <div>
-          <h2>Information</h2>
-          <p>Name: {information.name}</p>
-          <p>Model: {information.model}</p>
-          <p>Manufacturer: {information.manufacturer}</p>
-          <p>Cost in credits: {information.cost_in_credits}</p>
-          <p>Length: {information.length}</p>
-          <p>Max atmosphering speed: {information.max_atmosphering_speed}</p>
-          <p>Crew: {information.crew}</p>
-          <p>Passengers: {information.passengers}</p>
-          <p>Cargo capacity: {information.cargo_capacity}</p>
-          <p>Consumables: {information.consumables}</p>
-          <p>Hyperdrive rating: {information.hyperdrive_rating}</p>
-          <p>MGLT: {information.MGLT}</p>
-          <p>Starship Class: {information.starship_class}</p>
-        </div>
-      );
-
-    default:
-      break;
+    }
+    return <div>{listItems}</div>;
   }
+
+  async function loadObjectToPrint() {
+    let tempObj = {};
+    let tempArr = [];
+    await Promise.all(
+      Object.entries(information).map(async ([key, value]) => {
+        console.log({ key }, { value });
+        if (Array.isArray(value)) {
+          await Promise.all(
+            value
+              .map((element) => {
+                if (
+                  typeof element === "string" &&
+                  key !== "url" &&
+                  element.startsWith("http")
+                ) {
+                  return element;
+                }
+              })
+              .filter(Boolean)
+              .map((element) =>
+                fetchVal(element, key).then((v) => tempArr.push(v, ", "))
+              )
+          );
+          tempObj = { ...tempObj, [key]: tempArr };
+          tempArr = [];
+        } else if (
+          typeof value === "string" &&
+          key !== "url" &&
+          value.startsWith("http")
+        ) {
+          await Promise.resolve(
+            fetchVal(value, key).then(
+              (v) => (tempObj = { ...tempObj, [key]: v })
+            )
+          );
+        } else tempObj = { ...tempObj, [key]: value };
+      })
+    );
+
+    console.log({ tempObj });
+    setObjectToPrint(tempObj);
+  }
+
+  return <div>{printObject()}</div>;
 };

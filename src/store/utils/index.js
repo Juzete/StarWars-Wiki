@@ -16,9 +16,9 @@ export const postComm = (initialState, path, id, comment, metaData) => {
   console.log(initialState[path][id - 1], 123123131);
   const tempArray = [];
   if (commentsObj) {
-    commentsObj.forEach(item => {
+    commentsObj.forEach((item) => {
       tempArray.push(item.id);
-    }); 
+    });
     commentId = Math.max(...tempArray) + 1;
     let payload = {
       id: commentId,

@@ -18,8 +18,8 @@ const Modal = ({ type, id, visible, setVisible }) => {
     >
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <div>
-          {PrintConditions(type, id)}
-          <Comments path={type} id={id}/>
+          <PrintConditions type={type} id={id} />
+          <Comments path={type} id={id} />
         </div>
       </div>
     </div>
