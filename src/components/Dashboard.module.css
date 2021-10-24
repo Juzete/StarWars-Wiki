@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  width: 200px;
+  width: 300px;
   margin: 0 auto;
   margin-top: 15%;
   color: white;
@@ -11,6 +11,17 @@
   border: 2px white solid;
   border-radius: 10px;
   z-index: 100;
+}
+
+.head {
+  width: 100%;
+}
+.email {
+  width: 100%;
+}
+.avatar {
+  width: 30%;
+  height: 30%;;
 }
 
 .background {
