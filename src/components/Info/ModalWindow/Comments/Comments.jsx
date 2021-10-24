@@ -20,6 +20,7 @@ export default function Comments({ path, id }) {
       return commentsData.map((item) => {
         return (
           <div key={item.metaData.time} className={styles.comment}>
+            <img src={`https://avatars.dicebear.com/api/bottts/${item.metaData.userName}.svg`} alt="avatar" className={styles.avatar}/>
             <p className={styles.meta}>
               {item.metaData.userName}{" "}
               {item.metaData.time

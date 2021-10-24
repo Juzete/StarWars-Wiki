@@ -9,6 +9,10 @@
   margin: 5px;
 }
 
+.avatar {
+  width: 5%;
+}
+
 .meta {
   font-size: small;
 }
