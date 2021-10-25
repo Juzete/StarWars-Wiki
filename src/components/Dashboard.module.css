@@ -24,6 +24,18 @@
   height: 30%;;
 }
 
+.logout {
+  padding: 5px;
+  margin-top: 15px;
+  border: 2px solid white;
+  border-radius: 15px;
+  text-decoration: none;
+}
+.logout:hover {
+  cursor: pointer;
+  background-color: rgba(155, 155, 155, 0.171);
+}
+
 .background {
   position: fixed;
   width: 100%;

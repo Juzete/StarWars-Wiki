@@ -1,9 +1,8 @@
-import { Button } from "react-bootstrap";
 import React, { Suspense } from "react";
 import { useState } from "react";
-import { Alert, Card } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styles from "./Dashboard.module.css";
 import { Canvas } from "@react-three/fiber";
 import StarsModel from "./Models/Stars/StarsModel";
@@ -44,10 +43,10 @@ export default function Dashboard() {
           <div className={styles.email}>
             <strong>Email:</strong> {currentUser.email}
           </div>
-          <div className="w-100 text-center mt-2">
-            <Button variant="link" onClick={handleLogout}>
+          <div className={styles.logout}>
+            <a variant="link" onClick={handleLogout}>
               Log Out
-            </Button>
+            </a>
           </div>
         </div>
         <div className={styles.stars}>

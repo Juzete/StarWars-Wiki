@@ -50,7 +50,6 @@ export const PrintConditions = ({ type, id }) => {
     let tempArr = [];
     await Promise.all(
       Object.entries(information).map(async ([key, value]) => {
-        console.log({ key }, { value });
         if (Array.isArray(value)) {
           await Promise.all(
             value
@@ -83,8 +82,6 @@ export const PrintConditions = ({ type, id }) => {
         } else tempObj = { ...tempObj, [key]: value };
       })
     );
-
-    console.log({ tempObj });
     setObjectToPrint(tempObj);
   }
 

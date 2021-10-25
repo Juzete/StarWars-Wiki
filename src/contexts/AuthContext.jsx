@@ -49,8 +49,6 @@ export function AuthProvider({ children }) {
     dispatchAuth();
   }, [currentUser]);
 
-  console.log({ currentUser });
-
   const value = {
     currentUser,
     signUp,

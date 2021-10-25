@@ -1,9 +1,6 @@
 import { child, get, getDatabase, onValue, ref, set } from "@firebase/database";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { database } from "../../../../firebase/firebase";
-import { postCommentAction } from "../../../../store/actions/wiki";
 import styles from "./Comments.module.css";
 
 export default function Comments({ path, id }) {
@@ -13,21 +10,27 @@ export default function Comments({ path, id }) {
   const [commentId, setCommentId] = useState(0);
   const [commentsData, setCommentsData] = useState(null);
   const information = useSelector((state) => state.wiki);
+  const isAuth = useSelector((state) => state.wiki.currentUser);
 
   const printComments = () => {
-    console.log({ commentsData });
     if (commentsData !== null) {
       return commentsData.map((item) => {
         return (
           <div key={item.metaData.time} className={styles.comment}>
-            <img src={`https://avatars.dicebear.com/api/bottts/${item.metaData.userName}.svg`} alt="avatar" className={styles.avatar}/>
             <p className={styles.meta}>
+              <img
+                src={`https://avatars.dicebear.com/api/bottts/${item.metaData.userName}.svg`}
+                alt="avatar"
+                className={styles.avatar}
+              />
               {item.metaData.userName}{" "}
               {item.metaData.time
-                .replace(/-/g, " ")
+                .replace(/-/g, ".")
                 .replace("T", " ")
-                .replace("Z", " ")}
+                .replace("Z", " ")
+                .slice(0, [item.metaData.time.length - 5])}
             </p>
+            <hr />
             <p>{item.comment}</p>{" "}
           </div>
         );
@@ -60,7 +63,6 @@ export default function Comments({ path, id }) {
   async function writeCommentDB() {
     textInput.current.value = "";
     const db = getDatabase();
-    console.log(information.currentUser);
     const metaData = {
       time: new Date().toISOString(),
       userName: information.currentUser.email,
@@ -76,14 +78,19 @@ export default function Comments({ path, id }) {
       <h2>Comments: </h2>
       {printComments()}
 
-      <p>Input your comment</p>
-      <input
-        type="text"
-        onInput={input}
-        ref={textInput}
-        placeholder="Type a comment..."
-      />
-      <button onClick={writeCommentDB}>Post comment</button>
+      {isAuth ? (
+        <>
+          <p>Input your comment</p>
+            {" "}
+            <input
+              type="text"
+              onInput={input}
+              ref={textInput}
+              placeholder="Type a comment..."
+            />
+            <button onClick={writeCommentDB}>Post comment</button>{" "}
+        </>
+      ) : null}
     </div>
   );
 }

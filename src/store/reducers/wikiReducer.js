@@ -52,7 +52,6 @@ export default function wikiReducer(state = initialState, action) {
       };
 
     case POST_COMMENT:
-      console.log(state[action.path][action.id], 1111);
       return {
         ...state,
         [action.path]: postComm(

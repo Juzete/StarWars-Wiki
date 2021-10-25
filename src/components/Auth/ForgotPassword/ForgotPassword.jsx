@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import React, { Suspense, useRef } from "react";
 import { useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Form, Button , Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
 import Logo from "../../Logo/Logo";

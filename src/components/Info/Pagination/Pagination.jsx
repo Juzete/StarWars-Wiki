@@ -22,7 +22,6 @@ export default function Pagination({ setUrl }) {
         <button
           onClick={() => {
             setUrl(nextPage);
-            console.log({ nextPage });
           }}
         >
           {">"}

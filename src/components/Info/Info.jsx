@@ -24,7 +24,6 @@ export default function Info({ fetchPath }) {
     async function fetchData() {
       let res = await fetch(url);
       let data = await res.json();
-      console.log({ data });
       dispatch(fetchDataAction(data.results, fetchPath));
       dispatch(setPaginationAction(data.previous, data.next));
     }
@@ -82,7 +81,6 @@ export default function Info({ fetchPath }) {
       ) : (
         <div className={styles.infoWrapper} onScroll={(e) => scrollHandler(e)}>
           {printLabelInfo()}
-          {/* <Pagination setUrl={setUrl} /> */}
         </div>
       )}
 

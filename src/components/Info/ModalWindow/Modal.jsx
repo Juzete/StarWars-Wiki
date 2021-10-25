@@ -7,7 +7,6 @@ const Modal = ({ type, id, visible, setVisible }) => {
   if (visible) {
     rootClasses.push(styles.active);
   }
-  console.log({ id });
 
   return (
     <div

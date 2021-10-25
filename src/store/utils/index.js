@@ -6,14 +6,12 @@ export const dataSetLocation = (initialState, payload, path) => {
     return [...acc, { id: newIndex[0], item: item }];
   }, initialState[path]);
   const result = initialState[path];
-  console.log(result, "result");
   return result;
 };
 
 export const postComm = (initialState, path, id, comment, metaData) => {
   let commentsObj = initialState[path][id - 1].comments;
   let commentId = null;
-  console.log(initialState[path][id - 1], 123123131);
   const tempArray = [];
   if (commentsObj) {
     commentsObj.forEach((item) => {
