@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { showModalAction } from "../../../store/actions/wiki";
+import { useWikiSelector } from "../../../store/utils";
 
 export const PrintConditions = ({ type, id }) => {
-  const information = useSelector((state) => state.wiki.dataInstance);
+  const information = useWikiSelector();
   const dispatch = useDispatch();
   const [objectToPrint, setObjectToPrint] = useState({});
 
@@ -13,13 +14,7 @@ export const PrintConditions = ({ type, id }) => {
 
   useEffect(() => {
     loadObjectToPrint();
-  }, [information]);
-
-  async function fetchData(url, param) {
-    let res = await fetch(url);
-    let data = await res.json();
-    return data[param];
-  }
+  }, [information.dataInstance]);
 
   async function fetchVal(value, key) {
     const res = await fetch(value);
@@ -49,7 +44,7 @@ export const PrintConditions = ({ type, id }) => {
     let tempObj = {};
     let tempArr = [];
     await Promise.all(
-      Object.entries(information).map(async ([key, value]) => {
+      Object.entries(information.dataInstance).map(async ([key, value]) => {
         if (Array.isArray(value)) {
           await Promise.all(
             value

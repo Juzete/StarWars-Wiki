@@ -1,16 +1,18 @@
+import React from "react";
 import Comments from "./Comments/Comments";
 import styles from "./Modal.module.css";
 import { PrintConditions } from "./printConditions";
 
-const Modal = ({ type, id, visible, setVisible }) => {
-  const rootClasses = [styles.modal];
+const Modal = React.memo(({ type, id, visible, setVisible }) => {
+  const classNames = require("classnames/bind");
   if (visible) {
-    rootClasses.push(styles.active);
+    const cx = classNames.bind(styles);
+    var modalClasses = cx("active", styles.modal);
   }
 
   return (
     <div
-      className={rootClasses.join(" ")}
+      className={modalClasses}
       onClick={() => {
         setVisible(false);
       }}
@@ -23,6 +25,6 @@ const Modal = ({ type, id, visible, setVisible }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Modal;

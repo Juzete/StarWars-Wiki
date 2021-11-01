@@ -1,17 +1,34 @@
 import { AuthProvider } from "../contexts/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Dashboard from "./Dashboard";
+import Dashboard from "../pages/DashboardPage/Dashboard";
 import PrivateRoute from "./PrivateRoute";
-import ForgotPassword from "./Auth/ForgotPassword/ForgotPassword";
-import SignUp from "./Auth/SignUp/SignUp";
-import Login from "./Auth/Login/Login";
-import ForwardPage from "./ForwardPage/ForwardPage";
+import ForgotPassword from "../pages/AuthPages/ForgotPassword/ForgotPassword";
+import SignUp from "../pages/AuthPages/SignUp/SignUp";
+import Login from "../pages/AuthPages/Login/Login"
+import ForwardPage from "../pages/ForwardPage/ForwardPage";
 import { infoRoutes } from "./Info/infoRoutes";
 import Logo from "./Logo/Logo";
-import Navigation from "./Navigation/Navigation";
-import Profile from "./Auth/ProfileButton/ProfileButton";
+import Profile from "./ProfileButton/ProfileButton";
+import Info from "./Info/Info";
+import Navigation from "../router/Navigation/Navigation";
 
 function App() {
+  const renderMainPage = () => (
+    <>
+      <Navigation />
+      <Logo />
+      <Profile />
+      <Route path="/forward" component={ForwardPage} />
+      {infoRoutes.map(({ path, fetchPath }) => (
+        <Route
+          key={fetchPath}
+          path={path}
+          render={(props) => <Info {...props} fetchPath={fetchPath} />}
+        />
+      ))}
+    </>
+  );
+
   return (
     <div>
       <Router>
@@ -21,24 +38,7 @@ function App() {
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={Login} />
             <Route path="/forgot-password" component={ForgotPassword} />
-            <Route
-              path="/"
-              component={() => (
-                <>
-                  <Navigation />
-                  <Logo />
-                  <Profile />
-                  <Route path="/forward" component={ForwardPage} />
-                  {infoRoutes.map(({ path, component: C, fetchPath }) => (
-                    <Route
-                      key={fetchPath}
-                      path={path}
-                      render={(props) => <C {...props} fetchPath={fetchPath} />}
-                    />
-                  ))}
-                </>
-              )}
-            />
+            <Route path="/" component={renderMainPage} />
           </Switch>
         </AuthProvider>
       </Router>

@@ -1,19 +1,26 @@
 import { Canvas } from "@react-three/fiber";
 import React, { Suspense } from "react";
-import EarthModel from "../Models/EarthModel/EarthModel";
-import ScrollingText from "../Models/ScrollingText/ScrollingText";
-import StarsModel from "../Models/Stars/StarsModel";
+import EarthModel from "../../components/Models/EarthModel/EarthModel";
+import ScrollingText from "../../components/Models/ScrollingText/ScrollingText";
+import StarsModel from "../../components/Models/Stars/StarsModel";
 import styles from "./ForwardPage.module.css";
 import { useState } from "react";
 import { useEffect } from "react";
 import Loader from "react-js-loader";
+import { Html, useProgress } from "@react-three/drei";
+
+function Asd() {
+  const { progress } = useProgress()
+  console.log({progress})
+  return <Html center>{progress} % loaded</Html>
+}
 
 export default function ForwardPage() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    setTimeout(() => {
+    return setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 0);
   }, []);
 
   return (
@@ -34,7 +41,7 @@ export default function ForwardPage() {
 
       <div className={`${styles.earthModelWrapper}`}>
         <Canvas>
-          <Suspense fallback={null}>
+          <Suspense fallback={<Asd />}>
             <EarthModel />
             <StarsModel />
           </Suspense>

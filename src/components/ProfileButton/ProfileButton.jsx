@@ -1,13 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useWikiSelector } from "../../store/utils";
 import styles from "./ProfileButton.module.css";
 
 export default function Profile() {
-  const isAuth = useSelector((state) => state.wiki.currentUser);
+  const isAuth = useWikiSelector();
   return (
     <Link to="/" className={styles.button}>
-      {isAuth ? "Profile" : "Log In"}
+      {isAuth.currentUser ? "Profile" : "Log In"}
     </Link>
   );
 }

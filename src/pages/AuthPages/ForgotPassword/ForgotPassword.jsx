@@ -3,9 +3,9 @@ import React, { Suspense, useRef } from "react";
 import { useState } from "react";
 import { Form, Button , Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Logo from "../../../components/Logo/Logo";
+import StarsModel from "../../../components/Models/Stars/StarsModel";
 import { useAuth } from "../../../contexts/AuthContext";
-import Logo from "../../Logo/Logo";
-import StarsModel from "../../Models/Stars/StarsModel";
 import styles from "./ForgotPassword.module.css";
 
 export default function ForgotPassword() {

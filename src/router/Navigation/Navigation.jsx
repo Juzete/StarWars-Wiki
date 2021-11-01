@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Navigation.module.css";
 
-export default function Navigation() {
+export default React.memo(function Navigation() {
   return (
     <div className={styles.wrapper}>
       <ul className={styles.list}>
@@ -39,4 +39,4 @@ export default function Navigation() {
       </ul>
     </div>
   );
-}
+});

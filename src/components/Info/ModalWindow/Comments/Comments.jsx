@@ -1,16 +1,15 @@
 import { child, get, getDatabase, onValue, ref, set } from "@firebase/database";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useWikiSelector } from "../../../../store/utils";
 import styles from "./Comments.module.css";
 
-export default function Comments({ path, id }) {
+export default React.memo(function Comments({ path, id }) {
   const textInput = React.createRef();
 
   const [comment, setComment] = useState("");
   const [commentId, setCommentId] = useState(0);
   const [commentsData, setCommentsData] = useState(null);
-  const information = useSelector((state) => state.wiki);
-  const isAuth = useSelector((state) => state.wiki.currentUser);
+  const information = useWikiSelector();
 
   const printComments = () => {
     if (commentsData !== null) {
@@ -27,8 +26,7 @@ export default function Comments({ path, id }) {
               {item.metaData.time
                 .replace(/-/g, ".")
                 .replace("T", " ")
-                .replace("Z", " ")
-                .slice(0, [item.metaData.time.length - 5])}
+                .slice(0, item.metaData.time.length - 5)}
             </p>
             <hr />
             <p>{item.comment}</p>{" "}
@@ -78,19 +76,18 @@ export default function Comments({ path, id }) {
       <h2>Comments: </h2>
       {printComments()}
 
-      {isAuth ? (
+      {information.currentUser ? (
         <>
-          <p>Input your comment</p>
-            {" "}
-            <input
-              type="text"
-              onInput={input}
-              ref={textInput}
-              placeholder="Type a comment..."
-            />
-            <button onClick={writeCommentDB}>Post comment</button>{" "}
+          <p>Input your comment</p>{" "}
+          <input
+            type="text"
+            onInput={input}
+            ref={textInput}
+            placeholder="Type a comment..."
+          />
+          <button onClick={writeCommentDB}>Post comment</button>{" "}
         </>
       ) : null}
     </div>
   );
-}
+});

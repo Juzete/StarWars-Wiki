@@ -4,16 +4,10 @@ import { useAuth } from "../contexts/AuthContext";
 
 export default function PrivateRoute({ component: Component, ...rest }) {
   const { currentUser } = useAuth();
-  return (
-    <Route
-      {...rest}
-      render={(props) => {
-        return currentUser ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/login" />
-        );
-      }}
-    ></Route>
-  );
+
+  const isAuth = (props) => {
+    return currentUser ? <Component {...props} /> : <Redirect to="/login" />;
+  };
+
+  return <Route {...rest} render={isAuth}></Route>;
 }

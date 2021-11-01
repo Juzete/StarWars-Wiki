@@ -21,5 +21,7 @@ const loggerMiddleware = (store) => (next) => (action) => {
 
 export const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(thunk, loggerMiddleware))
+  process.env.NODE_ENV === "development"
+    ? composeWithDevTools(applyMiddleware(thunk, loggerMiddleware))
+    : applyMiddleware(thunk)
 );

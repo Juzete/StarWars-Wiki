@@ -1,19 +1,19 @@
 import React, { Suspense } from "react";
 import { useState } from "react";
 import { Alert } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import styles from "./Dashboard.module.css";
 import { Canvas } from "@react-three/fiber";
-import StarsModel from "./Models/Stars/StarsModel";
-import Logo from "./Logo/Logo";
-import { useSelector } from "react-redux";
+import { useAuth } from "../../contexts/AuthContext";
+import StarsModel from "../../components/Models/Stars/StarsModel";
+import { useWikiSelector } from "../../store/utils";
+import Logo from "../../components/Logo/Logo";
 
 export default function Dashboard() {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const history = useHistory();
-  const information = useSelector((state) => state.wiki);
+  const information = useWikiSelector();
 
   async function handleLogout() {
     setError("");

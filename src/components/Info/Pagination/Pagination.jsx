@@ -1,9 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useWikiSelector } from "../../../store/utils";
 import styles from "./Pagination.module.css";
 
 export default function Pagination({ setUrl }) {
-  const data = useSelector((state) => state.wiki);
+  const data = useWikiSelector();
   const prevPage = data.prevPage;
   const nextPage = data.nextPage;
 
