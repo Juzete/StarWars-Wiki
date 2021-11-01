@@ -32,14 +32,8 @@ The build is minified and the filenames include the hashes.\
 - **assets** - fonts and textures
 - **contexts and firebase** - contains the code for working with authorization
 - **store** - contains the code for working with the store (reducers and other)
-- *Components* - contains most of all components of the project
-- **Auth** - contains components related to authorization on the site
-- **ForwardPage** - site's home page
-- **Info** - contains components related to displaying a modal window, displaying information, etc.
-- **Logo** - just a logo
-- **Models** - contains components with models from three js
-- **Navigation** - section navigation component
-
+- **Components** - contains additional components for pages
+- **Pages** - contains the components of the main pages
 
 
 
