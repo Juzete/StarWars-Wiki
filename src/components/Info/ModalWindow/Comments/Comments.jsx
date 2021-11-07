@@ -1,39 +1,42 @@
-import { child, get, getDatabase, onValue, ref, set } from "@firebase/database";
-import React, { useEffect, useState } from "react";
-import { useWikiSelector } from "../../../../store/utils";
-import styles from "./Comments.module.css";
+import { child, get, getDatabase, onValue, ref, set } from '@firebase/database';
+import React, { useEffect, useState } from 'react';
+import { useWikiSelector } from '../../../../store/utils';
+import styles from './Comments.module.css';
+import { v4 as uuidv4 } from 'uuid';
 
 export default React.memo(function Comments({ path, id }) {
   const textInput = React.createRef();
 
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState('');
   const [commentId, setCommentId] = useState(0);
   const [commentsData, setCommentsData] = useState(null);
   const information = useWikiSelector();
 
   const printComments = () => {
-    if (commentsData !== null) {
-      return commentsData.map((item) => {
-        return (
-          <div key={item.metaData.time} className={styles.comment}>
+    const commentsArray = [];
+    if (commentsData) {
+      for (let key in commentsData) {
+        commentsArray.push(
+          <div key={commentsData[key].metaData.time} className={styles.comment}>
             <p className={styles.meta}>
               <img
-                src={`https://avatars.dicebear.com/api/bottts/${item.metaData.userName}.svg`}
+                src={`https://avatars.dicebear.com/api/bottts/${commentsData[key].metaData.userName}.svg`}
                 alt="avatar"
                 className={styles.avatar}
               />
-              {item.metaData.userName}{" "}
-              {item.metaData.time
-                .replace(/-/g, ".")
-                .replace("T", " ")
-                .slice(0, item.metaData.time.length - 5)}
+              {commentsData[key].metaData.userName}
+              {commentsData[key].metaData.time
+                .replace(/-/g, '.')
+                .replace('T', ' ')
+                .slice(0, commentsData[key].metaData.time.length - 5)}
             </p>
             <hr />
-            <p>{item.comment}</p>{" "}
+            <p>{commentsData[key].comment}</p>
           </div>
         );
-      });
+      }
     }
+    return commentsArray;
   };
 
   useEffect(() => {
@@ -41,10 +44,7 @@ export default React.memo(function Comments({ path, id }) {
     const update = (snapshot) => {
       const data = snapshot.val();
       setCommentsData(data);
-      if (data) {
-        const ids = Object.keys(data);
-        setCommentId(Math.max(...ids, 0) + 1);
-      } else setCommentId(1);
+      setCommentId(uuidv4);
     };
     const dbRef = ref(getDatabase());
     const db = getDatabase();
@@ -59,7 +59,7 @@ export default React.memo(function Comments({ path, id }) {
   };
 
   async function writeCommentDB() {
-    textInput.current.value = "";
+    textInput.current.value = '';
     const db = getDatabase();
     const metaData = {
       time: new Date().toISOString(),
@@ -75,17 +75,16 @@ export default React.memo(function Comments({ path, id }) {
     <div className={styles.wrapper}>
       <h2>Comments: </h2>
       {printComments()}
-
       {information.currentUser ? (
         <>
-          <p>Input your comment</p>{" "}
+          <p>Input your comment</p>{' '}
           <input
             type="text"
             onInput={input}
             ref={textInput}
             placeholder="Type a comment..."
           />
-          <button onClick={writeCommentDB}>Post comment</button>{" "}
+          <button onClick={writeCommentDB}>Post comment</button>{' '}
         </>
       ) : null}
     </div>

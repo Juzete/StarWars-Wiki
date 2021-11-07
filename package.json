@@ -24,6 +24,7 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "three": "^0.132.2",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
