@@ -1,31 +1,30 @@
-import { Canvas } from "@react-three/fiber";
-import React, { Suspense, useRef } from "react";
-import { useState } from "react";
-import { Form, Button , Alert } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import Logo from "../../../components/Logo/Logo";
-import StarsModel from "../../../components/Models/Stars/StarsModel";
-import { useAuth } from "../../../contexts/AuthContext";
-import styles from "./ForgotPassword.module.css";
+import { Canvas } from '@react-three/fiber';
+import React, { Suspense, useRef } from 'react';
+import { useState } from 'react';
+import { Form, Button, Alert } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import Logo from '../../../components/Logo/Logo';
+import StarsModel from '../../../components/Models/Stars/StarsModel';
+import { useAuth } from '../../../contexts/AuthContext';
+import styles from './ForgotPassword.module.css';
 
 export default function ForgotPassword() {
   const emailRef = useRef();
   const { resetPassword } = useAuth();
-  const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      setMessage("");
-      setError("");
+      setMessage('');
+      setError('');
       setLoading(true);
       await resetPassword(emailRef.current.value);
-      setMessage("Check your email for further instructions");
+      setMessage('Check your email for further instructions');
     } catch (e) {
-      console.log(e);
-      setError("Failed to reset password");
+      setError('Failed to reset password');
     }
 
     setLoading(false);

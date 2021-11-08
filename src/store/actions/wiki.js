@@ -2,7 +2,6 @@ import {
   FETCH_DATA,
   POST_COMMENT,
   SET_CURRENT_USER,
-  SET_PAGINATION,
   SHOW_MODAL,
 } from "../constants";
 
@@ -15,11 +14,6 @@ export const showModalAction = (path, id) => ({
   type: SHOW_MODAL,
   path: path,
   id: id,
-});
-export const setPaginationAction = (prev, next) => ({
-  type: SET_PAGINATION,
-  prev: prev,
-  next: next,
 });
 export const setCurrentUserAction = (currentUser) => ({
   type: SET_CURRENT_USER,

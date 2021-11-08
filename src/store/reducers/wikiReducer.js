@@ -2,7 +2,6 @@ import {
   FETCH_DATA,
   POST_COMMENT,
   SET_CURRENT_USER,
-  SET_PAGINATION,
   SHOW_MODAL,
 } from "../constants";
 import { dataSetLocation, postComm } from "../utils";
@@ -10,8 +9,6 @@ import { dataSetLocation, postComm } from "../utils";
 const initialState = {
   currentUser: null,
   isLoading: false,
-  nextPage: null,
-  prevPage: null,
   data: [],
   people: [],
   planets: [],
@@ -36,13 +33,6 @@ export default function wikiReducer(state = initialState, action) {
       return {
         ...state,
         dataInstance: state[action.path][id].item,
-      };
-
-    case SET_PAGINATION:
-      return {
-        ...state,
-        nextPage: action.next,
-        prevPage: action.prev,
       };
 
     case SET_CURRENT_USER:

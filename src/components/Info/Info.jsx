@@ -1,14 +1,14 @@
-import { Canvas } from "@react-three/fiber";
-import React, { Suspense } from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useDispatch} from "react-redux";
-import StarsModel from "../Models/Stars/StarsModel";
-import styles from "./Info.module.css";
-import Loader from "react-js-loader";
-import Modal from "./ModalWindow/Modal";
-import { fetchDataAction, setPaginationAction } from "../../store/actions/wiki";
-import { useWikiSelector } from "../../store/utils";
+import { Canvas } from '@react-three/fiber';
+import React, { Suspense } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import StarsModel from '../Models/Stars/StarsModel';
+import styles from './Info.module.css';
+import Loader from 'react-js-loader';
+import Modal from './ModalWindow/Modal';
+import { fetchDataAction } from '../../store/actions/wiki';
+import { useWikiSelector } from '../../store/utils';
 
 export default function Info({ fetchPath }) {
   const dispatch = useDispatch();
@@ -19,13 +19,13 @@ export default function Info({ fetchPath }) {
   const [type, setType] = useState();
   const defaultUrl = `https://swapi.dev/api/${fetchPath}/?format=json`;
   const [url, setUrl] = useState(defaultUrl);
+  const infoWindowHeight = 700;
 
   useEffect(() => {
     async function fetchData() {
       let res = await fetch(url);
       let data = await res.json();
       dispatch(fetchDataAction(data.results, fetchPath));
-      dispatch(setPaginationAction(data.previous, data.next));
     }
     async function loadingFetch() {
       await fetchData();
@@ -36,7 +36,7 @@ export default function Info({ fetchPath }) {
   }, [url]);
 
   const scrollHandler = (e) => {
-    if (e.target.scrollHeight - e.target.scrollTop < 700 && allData.nextPage) {
+    if (e.target.scrollHeight - e.target.scrollTop < infoWindowHeight && allData.nextPage) {
       setUrl(allData.nextPage);
     }
   };
@@ -47,8 +47,8 @@ export default function Info({ fetchPath }) {
         <div
           onClick={(e) => {
             setShowModal(true);
-            setType(e.target.getAttribute("type"));
-            setInstanceId(e.target.getAttribute("id"));
+            setType(e.target.getAttribute('type'));
+            setInstanceId(e.target.getAttribute('id'));
           }}
           type={fetchPath}
           id={item.id}
@@ -74,8 +74,8 @@ export default function Info({ fetchPath }) {
       {loading ? (
         <Loader
           type="spinner-default"
-          bgColor={"#FFFFFF"}
-          title={"Loading..."}
+          bgColor={'#FFFFFF'}
+          title={'Loading...'}
           size={100}
         />
       ) : (

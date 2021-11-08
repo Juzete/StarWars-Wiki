@@ -7,7 +7,7 @@ import StarsModel from "../Models/Stars/StarsModel";
 import styles from "./Info.module.css";
 import Loader from "react-js-loader";
 import Modal from "./ModalWindow/Modal";
-import { fetchDataAction, setPaginationAction } from "../../store/actions/wiki";
+import { fetchDataAction} from "../../store/actions/wiki";
 import { useWikiSelector } from "../../store/utils";
 
 export default function Info({ fetchPath }) {
@@ -25,7 +25,6 @@ export default function Info({ fetchPath }) {
       let res = await fetch(url);
       let data = await res.json();
       dispatch(fetchDataAction(data.results, fetchPath));
-      dispatch(setPaginationAction(data.previous, data.next));
     }
     async function loadingFetch() {
       await fetchData();

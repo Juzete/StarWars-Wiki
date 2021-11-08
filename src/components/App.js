@@ -1,12 +1,12 @@
 import { AuthProvider } from "../contexts/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from "../pages/DashboardPage/Dashboard";
-import PrivateRoute from "./PrivateRoute";
+import PrivateRoute from "../router/PrivateRoute";
 import ForgotPassword from "../pages/AuthPages/ForgotPassword/ForgotPassword";
 import SignUp from "../pages/AuthPages/SignUp/SignUp";
 import Login from "../pages/AuthPages/Login/Login"
 import ForwardPage from "../pages/ForwardPage/ForwardPage";
-import { infoRoutes } from "./Info/infoRoutes";
+import { infoRoutes } from "../router/infoRoutes"
 import Logo from "./Logo/Logo";
 import Profile from "./ProfileButton/ProfileButton";
 import Info from "./Info/Info";

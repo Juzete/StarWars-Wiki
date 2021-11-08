@@ -1,21 +1,20 @@
-import { Canvas } from "@react-three/fiber";
-import React, { Suspense } from "react";
-import EarthModel from "../../components/Models/EarthModel/EarthModel";
-import ScrollingText from "../../components/Models/ScrollingText/ScrollingText";
-import StarsModel from "../../components/Models/Stars/StarsModel";
-import styles from "./ForwardPage.module.css";
-import { useState } from "react";
-import { useEffect } from "react";
-import Loader from "react-js-loader";
-import { Html, useProgress } from "@react-three/drei";
+import { Canvas } from '@react-three/fiber';
+import React, { Suspense } from 'react';
+import EarthModel from '../../components/Models/EarthModel/EarthModel';
+import ScrollingText from '../../components/Models/ScrollingText/ScrollingText';
+import StarsModel from '../../components/Models/Stars/StarsModel';
+import styles from './ForwardPage.module.css';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import Loader from 'react-js-loader';
+import { Html, useProgress } from '@react-three/drei';
 
-function Asd() {
-  const { progress } = useProgress()
-  console.log({progress})
-  return <Html center>{progress} % loaded</Html>
-}
+const Load = () => {
+  const { progress } = useProgress();
+  return <Html center>{progress} % loaded</Html>;
+};
 
-export default function ForwardPage() {
+export const ForwardPage = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     return setTimeout(() => {
@@ -28,8 +27,8 @@ export default function ForwardPage() {
       {loading ? (
         <Loader
           type="spinner-default"
-          bgColor={"#FFFFFF"}
-          title={"Loading..."}
+          bgColor={'#FFFFFF'}
+          title={'Loading...'}
           size={100}
           className={styles.loader}
         />
@@ -41,7 +40,7 @@ export default function ForwardPage() {
 
       <div className={`${styles.earthModelWrapper}`}>
         <Canvas>
-          <Suspense fallback={<Asd />}>
+          <Suspense fallback={<Load />}>
             <EarthModel />
             <StarsModel />
           </Suspense>
@@ -49,4 +48,6 @@ export default function ForwardPage() {
       </div>
     </div>
   );
-}
+};
+
+export default ForwardPage

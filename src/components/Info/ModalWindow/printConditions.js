@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { showModalAction } from "../../../store/actions/wiki";
 import { useWikiSelector } from "../../../store/utils";
@@ -16,7 +16,7 @@ export const PrintConditions = ({ type, id }) => {
     loadObjectToPrint();
   }, [information.dataInstance]);
 
-  async function fetchVal(value, key) {
+  async function fetchVal(value) {
     const res = await fetch(value);
     let data = await res.json();
     if (data.name) return data.name;
