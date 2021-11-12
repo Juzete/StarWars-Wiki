@@ -1,26 +1,28 @@
+import { AppRoutes } from './appRoutes';
+
 export const infoRoutes = [
   {
-    path: '/info/people',
+    path: AppRoutes.people,
     fetchPath: 'people',
   },
   {
-    path: '/info/planets',
+    path: AppRoutes.planets,
     fetchPath: 'planets',
   },
   {
-    path: '/info/films',
+    path: AppRoutes.films,
     fetchPath: 'films',
   },
   {
-    path: '/info/species',
+    path: AppRoutes.species,
     fetchPath: 'species',
   },
   {
-    path: '/info/vehicles',
+    path: AppRoutes.vehicles,
     fetchPath: 'vehicles',
   },
   {
-    path: '/info/starships',
+    path: AppRoutes.starships,
     fetchPath: 'starships',
   },
 ];
