@@ -5,7 +5,7 @@ import EarthModel from "./EarthModel/EarthModel";
 import StarsModel from "./Stars/StarsModel";
 import ScrollingText from "./ScrollingText/ScrollingText";
 
-export default function Models() {
+const Models = () => {
   return (
     <div className={styles.canvasContainer}>
       <Canvas>
@@ -18,3 +18,5 @@ export default function Models() {
     </div>
   );
 }
+
+export default  Models;

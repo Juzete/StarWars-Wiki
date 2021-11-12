@@ -1,10 +1,10 @@
 import { child, get, getDatabase, onValue, ref, set } from '@firebase/database';
 import React, { useEffect, useState } from 'react';
-import { useWikiSelector } from '../../../../store/utils';
-import styles from './Comments.module.css';
+import { useWikiSelector } from '@store/utils';
+import styles from './index.module.css';
 import { v4 as uuidv4 } from 'uuid';
 
-export default React.memo(function Comments({ path, id }) {
+const Comments = ({ path, id }) => {
   const textInput = React.createRef();
 
   const [comment, setComment] = useState('');
@@ -58,7 +58,7 @@ export default React.memo(function Comments({ path, id }) {
     setComment(textInput.current.value);
   };
 
-  async function writeCommentDB() {
+  const writeCommentDB = async() => {
     textInput.current.value = '';
     const db = getDatabase();
     const metaData = {
@@ -89,4 +89,6 @@ export default React.memo(function Comments({ path, id }) {
       ) : null}
     </div>
   );
-});
+};
+
+export default React.memo(Comments);

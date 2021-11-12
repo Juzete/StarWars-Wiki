@@ -3,8 +3,8 @@ import {
   POST_COMMENT,
   SET_CURRENT_USER,
   SHOW_MODAL,
-} from "../constants";
-import { dataSetLocation, postComm } from "../utils";
+} from '../constants';
+import { dataSetLocation, postComm } from '../utils';
 
 const initialState = {
   currentUser: null,
@@ -17,15 +17,17 @@ const initialState = {
   vehicles: [],
   starships: [],
   dataInstance: {},
+  nextPage: null,
 };
 
-export default function wikiReducer(state = initialState, action) {
+const wikiReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_DATA:
       return {
         ...state,
         data: action.payload,
         [action.path]: dataSetLocation(state, action.payload, action.path),
+        nextPage: action.nextPage,
       };
 
     case SHOW_MODAL:
@@ -56,4 +58,6 @@ export default function wikiReducer(state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+export default wikiReducer;

@@ -1,30 +1,30 @@
-import React, { Suspense } from "react";
-import { useState } from "react";
-import { Alert } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
-import styles from "./Dashboard.module.css";
-import { Canvas } from "@react-three/fiber";
-import { useAuth } from "../../contexts/AuthContext";
-import StarsModel from "../../components/Models/Stars/StarsModel";
-import { useWikiSelector } from "../../store/utils";
-import Logo from "../../components/Logo/Logo";
+import React, { Suspense } from 'react';
+import { useState } from 'react';
+import { Alert } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+import styles from './index.module.css';
+import { Canvas } from '@react-three/fiber';
+import { useAuth } from '@src/utils/hooks';
+import StarsModel from '@src/components/Models/components/Stars';
+import { useWikiSelector } from '@store/utils';
+import Logo from '@src/components/Logo/';
 
-export default function Dashboard() {
-  const [error, setError] = useState("");
+const Dashboard = () => {
+  const [error, setError] = useState('');
   const { currentUser, logout } = useAuth();
   const history = useHistory();
   const information = useWikiSelector();
 
-  async function handleLogout() {
-    setError("");
+  const handleLogout = async () => {
+    setError('');
 
     try {
       await logout();
-      history.push("/login");
+      history.push('/login');
     } catch {
-      setError("Failed to log out");
+      setError('Failed to log out');
     }
-  }
+  };
   return (
     <>
       <Logo />
@@ -59,4 +59,6 @@ export default function Dashboard() {
       </div>
     </>
   );
-}
+};
+
+export default Dashboard;

@@ -5,10 +5,11 @@ import {
   SHOW_MODAL,
 } from "../constants";
 
-export const fetchDataAction = (data, path) => ({
+export const fetchDataAction = (data, path, nextPage) => ({
   type: FETCH_DATA,
   payload: data,
   path: path,
+  nextPage: nextPage,
 });
 export const showModalAction = (path, id) => ({
   type: SHOW_MODAL,

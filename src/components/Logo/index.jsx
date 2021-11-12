@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./Logo.module.css";
+import styles from "./index.module.css";
 
-export default React.memo(function Logo() {
+const Logo = () => {
   return (
     <Link className={styles.logo} to="/forward">
       STAR WARS WIKI
     </Link>
   );
-});
+};
+
+export default React.memo(Logo);

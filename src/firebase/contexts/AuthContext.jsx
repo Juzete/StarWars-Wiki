@@ -5,41 +5,36 @@ import {
   signOut,
 } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import { useContext } from "react";
 import { useDispatch } from "react-redux";
-import { auth } from "../firebase/firebase";
-import { setCurrentUserAction } from "../store/actions/wiki";
+import { auth } from "..";
+import { setCurrentUserAction } from "../../store/actions/wiki";
 
-const AuthContext = React.createContext();
+export const AuthContext = React.createContext();
 
-export function useAuth() {
-  return useContext(AuthContext);
-}
-
-export function AuthProvider({ children }) {
+export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
-  function signUp(email, password) {
+  const signUp = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   }
 
-  function login(email, password) {
+  const login =(email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   }
 
-  function logout() {
+  const logout = () => {
     return signOut(auth);
   }
 
-  function resetPassword(email) {
+  const resetPassword = (email) => {
     return sendPasswordResetEmail(auth, email);
   }
 
   useEffect(() => {
-    async function dispatchAuth() {
-      const unsubscribe = await auth.onAuthStateChanged((user) => {
+    const dispatchAuth = () => {
+      const unsubscribe = auth.onAuthStateChanged((user) => {
         setCurrentUser(user);
         setLoading(false);
       });
@@ -63,3 +58,4 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
+

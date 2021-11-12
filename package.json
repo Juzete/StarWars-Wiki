@@ -5,9 +5,6 @@
   "dependencies": {
     "@react-three/drei": "^7.5.0",
     "@react-three/fiber": "^7.0.6",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
     "bootstrap": "^5.1.0",
     "classnames": "^2.3.1",
     "firebase": "^9.0.0",
@@ -20,7 +17,6 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "redux": "^4.1.1",
-    "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "three": "^0.132.2",
@@ -28,8 +24,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -50,5 +46,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-app-rewire-alias": "^1.1.4",
+    "react-app-rewired": "^2.1.8",
+    "redux-devtools-extension": "^2.13.9",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3"
   }
 }

@@ -1,7 +1,7 @@
 import React from "react";
-import { OrbitControls, Stars } from "@react-three/drei";
+import { Stars } from "@react-three/drei";
 
-export default function StarsModel() {
+const StarsModel = () => {
   return (
     <>
       <Stars
@@ -15,3 +15,5 @@ export default function StarsModel() {
     </>
   );
 }
+
+export default StarsModel;

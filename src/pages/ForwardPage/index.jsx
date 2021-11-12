@@ -1,9 +1,9 @@
 import { Canvas } from '@react-three/fiber';
 import React, { Suspense } from 'react';
-import EarthModel from '../../components/Models/EarthModel/EarthModel';
-import ScrollingText from '../../components/Models/ScrollingText/ScrollingText';
-import StarsModel from '../../components/Models/Stars/StarsModel';
-import styles from './ForwardPage.module.css';
+import EarthModel from '@src/components/Models/components/EarthModel/';
+import ScrollingText from '@src/components/Models/components/ScrollingText/';
+import StarsModel from '@src/components/Models/components/Stars/';
+import styles from './index.module.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Loader from 'react-js-loader';

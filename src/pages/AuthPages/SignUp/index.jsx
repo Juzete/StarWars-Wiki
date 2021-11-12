@@ -1,14 +1,14 @@
 import { Canvas } from "@react-three/fiber";
 import React, { Suspense, useRef } from "react";
 import { useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
-import Logo from "../../../components/Logo/Logo";
-import StarsModel from "../../../components/Models/Stars/StarsModel";
-import { useAuth } from "../../../contexts/AuthContext";
-import styles from "./SignUp.module.css";
+import Logo from "@src/components/Logo/";
+import StarsModel from "@src/components/Models/components/Stars/";
+import { useAuth } from "@src/utils/hooks";
+import styles from "./index.module.css";
 
-export default function SignUp() {
+const SignUp = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -17,7 +17,7 @@ export default function SignUp() {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
@@ -75,3 +75,5 @@ export default function SignUp() {
     </>
   );
 }
+
+export default SignUp;

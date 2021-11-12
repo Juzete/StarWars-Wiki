@@ -1,18 +1,18 @@
-import { AuthProvider } from "../contexts/AuthContext";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Dashboard from "../pages/DashboardPage/Dashboard";
-import PrivateRoute from "../router/PrivateRoute";
-import ForgotPassword from "../pages/AuthPages/ForgotPassword/ForgotPassword";
-import SignUp from "../pages/AuthPages/SignUp/SignUp";
-import Login from "../pages/AuthPages/Login/Login"
-import ForwardPage from "../pages/ForwardPage/ForwardPage";
-import { infoRoutes } from "../router/infoRoutes"
-import Logo from "./Logo/Logo";
-import Profile from "./ProfileButton/ProfileButton";
-import Info from "./Info/Info";
-import Navigation from "../router/Navigation/Navigation";
+import { AuthProvider } from './firebase/contexts/AuthContext';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Dashboard from './pages/DashboardPage/';
+import PrivateRoute from './components/PrivateRoutes';
+import ForgotPassword from './pages/AuthPages/ForgotPassword/';
+import SignUp from './pages/AuthPages/SignUp/';
+import Login from './pages/AuthPages/Login/';
+import ForwardPage from './pages/ForwardPage/';
+import { infoRoutes } from './constants/infoRoutes';
+import Logo from './components/Logo/';
+import Profile from './components/ProfileButton/';
+import Info from './components/Info/index';
+import Navigation from './router';
 
-function App() {
+const App = () => {
   const renderMainPage = () => (
     <>
       <Navigation />

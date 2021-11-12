@@ -3,14 +3,14 @@ import React, { Suspense } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import StarsModel from '../Models/Stars/StarsModel';
-import styles from './Info.module.css';
+import StarsModel from '@src/components/Models/components/Stars/index';
+import styles from './index.module.css';
 import Loader from 'react-js-loader';
-import Modal from './ModalWindow/Modal';
-import { fetchDataAction } from '../../store/actions/wiki';
-import { useWikiSelector } from '../../store/utils';
+import Modal from './components/ModalWindow/';
+import { fetchDataAction } from '@store/actions/wiki';
+import { useWikiSelector } from '@store/utils';
 
-export default function Info({ fetchPath }) {
+  const Info = ({ fetchPath }) => {
   const dispatch = useDispatch();
   const allData = useWikiSelector();
   const [loading, setLoading] = useState(true);
@@ -19,15 +19,15 @@ export default function Info({ fetchPath }) {
   const [type, setType] = useState();
   const defaultUrl = `https://swapi.dev/api/${fetchPath}/?format=json`;
   const [url, setUrl] = useState(defaultUrl);
-  const infoWindowHeight = 700;
+  const infoWindowHeight = 600;
 
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
       let res = await fetch(url);
       let data = await res.json();
-      dispatch(fetchDataAction(data.results, fetchPath));
+      dispatch(fetchDataAction(data.results, fetchPath, data.next));
     }
-    async function loadingFetch() {
+    const loadingFetch = async () => {
       await fetchData();
       setLoading(false);
     }
@@ -103,3 +103,5 @@ export default function Info({ fetchPath }) {
     </div>
   );
 }
+
+export default Info;

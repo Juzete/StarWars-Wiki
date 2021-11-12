@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import {wikiSelector} from "../selectors/selectors"
+import {wikiSelector} from "@src/store/selectors/"
 
 export const dataSetLocation = (initialState, payload, path) => {
   initialState[path] = payload.reduce((acc, item) => {

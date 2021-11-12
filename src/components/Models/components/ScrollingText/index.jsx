@@ -1,7 +1,7 @@
-import React, { Suspense } from "react";
-import styles from "./ScrollingText.module.css";
+import React from "react";
+import styles from "./index.module.css";
 
-export default function ScrollingText() {
+const ScrollingText = () => {
   return (
     <>
         <div className={styles.wrapper}>
@@ -18,3 +18,5 @@ export default function ScrollingText() {
     </>
   );
 }
+
+export default ScrollingText;

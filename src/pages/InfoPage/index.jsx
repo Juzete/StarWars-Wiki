@@ -10,7 +10,7 @@ import Modal from "./ModalWindow/Modal";
 import { fetchDataAction} from "../../store/actions/wiki";
 import { useWikiSelector } from "../../store/utils";
 
-export default function Info({ fetchPath }) {
+const Info = ({ fetchPath }) => {
   const dispatch = useDispatch();
   const allData = useWikiSelector();
   const [loading, setLoading] = useState(true);
@@ -21,12 +21,12 @@ export default function Info({ fetchPath }) {
   const [url, setUrl] = useState(defaultUrl);
 
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async() => {
       let res = await fetch(url);
       let data = await res.json();
       dispatch(fetchDataAction(data.results, fetchPath));
     }
-    async function loadingFetch() {
+    const loadingFetch = async() => {
       await fetchData();
       setLoading(false);
     }
@@ -102,3 +102,5 @@ export default function Info({ fetchPath }) {
     </div>
   );
 }
+
+export default Info;

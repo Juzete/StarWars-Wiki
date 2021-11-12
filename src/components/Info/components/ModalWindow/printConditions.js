@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { showModalAction } from "../../../store/actions/wiki";
-import { useWikiSelector } from "../../../store/utils";
+import { showModalAction } from "@store/actions/wiki";
+import { useWikiSelector } from "@store/utils";
 
 export const PrintConditions = ({ type, id }) => {
   const information = useWikiSelector();
@@ -16,14 +16,14 @@ export const PrintConditions = ({ type, id }) => {
     loadObjectToPrint();
   }, [information.dataInstance]);
 
-  async function fetchVal(value) {
+  const fetchVal = async (value) => {
     const res = await fetch(value);
     let data = await res.json();
     if (data.name) return data.name;
     else return data.title;
   }
 
-  function printObject() {
+  const printObject = () => {
     const listItems = [];
     for (const key in objectToPrint) {
       let field = key[0].toUpperCase() + key.slice(1);
@@ -40,7 +40,7 @@ export const PrintConditions = ({ type, id }) => {
     return <div>{listItems}</div>;
   }
 
-  async function loadObjectToPrint() {
+  const loadObjectToPrint = async () => {
     let tempObj = {};
     let tempArr = [];
     await Promise.all(

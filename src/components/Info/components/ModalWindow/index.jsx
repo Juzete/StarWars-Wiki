@@ -1,6 +1,6 @@
 import React from "react";
-import Comments from "./Comments/Comments";
-import styles from "./Modal.module.css";
+import Comments from "./Comments/";
+import styles from "./index.module.css";
 import { PrintConditions } from "./printConditions";
 
 const Modal = React.memo(({ type, id, visible, setVisible }) => {
