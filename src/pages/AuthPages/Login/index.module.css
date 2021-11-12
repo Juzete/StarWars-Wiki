@@ -29,3 +29,9 @@
   background-color: rgb(0, 3, 9);
   justify-content: center;
 }
+
+.error {
+  display: flex;
+  justify-self: center;
+  margin-left: 30px;
+}

@@ -58,18 +58,20 @@ const Comments = ({ path, id }) => {
     setComment(textInput.current.value);
   };
 
-  const writeCommentDB = async() => {
+  const writeCommentDB = async () => {
     textInput.current.value = '';
-    const db = getDatabase();
-    const metaData = {
-      time: new Date().toISOString(),
-      userName: information.currentUser.email,
-    };
-    await set(ref(db, `comments/${path}/id${id}/${commentId}`), {
-      metaData: metaData,
-      comment: comment,
-    });
-  }
+    if (comment) {
+      const db = getDatabase();
+      const metaData = {
+        time: new Date().toISOString(),
+        userName: information.currentUser.email,
+      };
+      await set(ref(db, `comments/${path}/id${id}/${commentId}`), {
+        metaData: metaData,
+        comment: comment,
+      });
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -83,6 +85,7 @@ const Comments = ({ path, id }) => {
             onInput={input}
             ref={textInput}
             placeholder="Type a comment..."
+            required
           />
           <button onClick={writeCommentDB}>Post comment</button>{' '}
         </>

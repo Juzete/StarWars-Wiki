@@ -1,40 +1,40 @@
-import { Canvas } from "@react-three/fiber";
-import React, { Suspense, useRef } from "react";
-import { useState } from "react";
-import { Form, Button, Alert } from "react-bootstrap";
-import { Link, useHistory } from "react-router-dom";
-import Logo from "@src/components/Logo/";
-import StarsModel from "@src/components/Models/components/Stars/";
-import { useAuth } from "@src/utils/hooks";
-import styles from "./index.module.css";
+import { Canvas } from '@react-three/fiber';
+import React, { Suspense, useRef } from 'react';
+import { useState } from 'react';
+import { Form, Button, Alert } from 'react-bootstrap';
+import { Link, useHistory } from 'react-router-dom';
+import Logo from '@src/components/Logo/';
+import StarsModel from '@src/components/Models/components/Stars/';
+import { useAuth } from '@src/utils/hooks';
+import styles from './index.module.css';
+import { useForm } from 'react-hook-form';
 
 const SignUp = () => {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
+  const { register, handleSubmit, watch } = useForm();
+  const email = watch('email');
+  const password = watch('password');
+  const passwordConfirm = watch('passwordConfirm');
   const { signUp } = useAuth();
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Password do not match");
+  const onSubmit = async (e) => {
+    if (password !== passwordConfirm) {
+      return setError('Password do not match');
     }
 
     try {
-      setError("");
+      setError('');
       setLoading(true);
-      await signUp(emailRef.current.value, passwordRef.current.value);
-      history.push("/");
+      await signUp(email, password);
+      history.push('/');
     } catch {
-      setError("Failed to create an account");
+      setError('Failed to create an account');
     }
 
     setLoading(false);
-  }
+  };
 
   return (
     <>
@@ -43,18 +43,30 @@ const SignUp = () => {
         <div className={styles.wrapper}>
           <h2 className="text-center mb-4">Sign Up</h2>
           {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
+              <Form.Control
+                type="email"
+                required
+                {...register('email', { required: true })}
+              />
             </Form.Group>
             <Form.Group id="password">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
+              <Form.Control
+                type="password"
+                required
+                {...register('password', { required: true })}
+              />
             </Form.Group>
             <Form.Group id="password-confirm">
               <Form.Label>Password Confirmation</Form.Label>
-              <Form.Control type="password" ref={passwordConfirmRef} required />
+              <Form.Control
+                type="password"
+                required
+                {...register('passwordConfirm', { required: true })}
+              />
             </Form.Group>
             <Button disabled={loading} className="w-100 mt-3" type="submit">
               Sign Up
@@ -74,6 +86,6 @@ const SignUp = () => {
       </div>
     </>
   );
-}
+};
 
 export default SignUp;

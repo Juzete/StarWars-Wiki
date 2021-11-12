@@ -7,21 +7,22 @@ import Logo from '@src/components/Logo/';
 import StarsModel from '@src/components/Models/components/Stars/';
 import { useAuth } from '@src/utils/hooks';
 import styles from './index.module.css';
+import { useForm } from 'react-hook-form';
 
 const Login = () => {
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const { register, handleSubmit, watch } = useForm();
+  const email = watch('email');
+  const password = watch('password');
   const { login } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (e) => {
     try {
       setError('');
       setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
+      await login(email, password);
       history.push('/');
     } catch (e) {
       setError('Failed to log in');
@@ -36,15 +37,24 @@ const Login = () => {
       <div className={styles.background}>
         <div className={styles.wrapper}>
           <h2 className="text-center mb-4">Log In</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit}>
+          <div className={styles.error}>
+            {' '}
+            {error && <Alert variant="danger">{error}</Alert>}
+          </div>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
+              <Form.Control
+                type="email"
+                {...register('email', { required: true })}
+              />
             </Form.Group>
             <Form.Group id="password">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
+              <Form.Control
+                type="password"
+                {...register('password', { required: true })}
+              />
             </Form.Group>
             <Button disabled={loading} className="w-100 mt-3" type="submit">
               Log In
